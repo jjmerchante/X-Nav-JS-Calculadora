@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Calculadora binaria</title>
+    <style>
+      .button {
+          background-color: green;
+          color: rgb(220,217,197);
+          border: none;
+          padding: 10px;
+          margin: 1px;
+          width: 40px;
+          font-size: 17px;
+          font-weight: bold;
+      }
+      input {
+          width: 220px;
+      }
+    </style>
+  </head>
+  <body>
+    <input type="text" id="screen" readonly>
+    </br>
+    <button type="button" class="button" onclick="javascript:newNum(0)">0</button>
+    <button type="button" class="button" onclick="javascript:newNum(1)">1</button>
+    <button type="button" class="button" onclick="javascript:add()">+</button>
+    <button type="button" class="button" onclick="javascript:subtract()">-</button>
+    <button type="button" class="button" onclick="javascript:calculate()">=</button>
+
+    <script type="text/javascript">
+      firstNumber = 0;
+      completed = false;
+      operation = ''
+
+      newNum = function(num){
+        var screen = document.getElementById('screen');
+        if (completed){
+          screen.value = num;
+          completed = false;
+        } else {
+          screen.value += num;
+        }
+      };
+
+      add = function(){
+        var screen = document.getElementById('screen');
+        firstNumber = parseInt(screen.value, 2);
+        screen.value = '';
+        operation = '+';
+      };
+
+      subtract = function(){
+          var screen = document.getElementById('screen');
+          firstNumber = parseInt(screen.value, 2);
+          screen.value = '';
+          operation = '-';
+      }
+
+      calculate = function(){
+        var screen = document.getElementById('screen');
+        var secondNumber = parseInt(screen.value, 2);
+        if (operation == '+')
+            var result = firstNumber + secondNumber;
+        else if (operation == '-')
+            var result = firstNumber - secondNumber;
+        else
+            var result = secondNumber;
+        screen.value = parseInt(result, 10).toString(2);
+        completed = true;
+        operation = '';
+      };
+    </script>
+
+  </body>
+</html>
